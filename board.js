@@ -16,31 +16,39 @@ function generateBoard(x, y, parameters) {
       row[j] = makeSpace();
     }
     board[i] = row
-  return nil;
+  return board;
+}
+
+function generateTestBoard() {
+  board = generateBlankBoard(2, 2);
+  board[0][0].isWall = false;
+  board[1][1].isWall = false;
+  return board;
 }
 
 function generateCustomBoard() {
-  return nil;
+  return null;
 }
 
-function outputBoard() {
-  return nil;
+function outputBoard(board) {
+  outputSpaces(board);
+  return null;
 }
 
 /* Adds a PLAYER to the BOARD. */
 function addPlayer(player, board) {
-  return nil;
+  return null;
 }
 
 /* Moves a PLAYER on a BOARD to a POSITION, assuming that the move is legal. */
 function movePlayer(player, board, position) {
-  return nil;
+  return null;
 }
 
 /* Adds an ITEM to a random space on the BOARD that does not already contain
  * anything. */
 function addItem(item, board) {
-  return nil;
+  return null;
 }
 
 /* Given a PLAYER on a BOARD, and a POSITION, and the number of SPACES that the
@@ -64,9 +72,34 @@ function allLegalMoves(player, board, spaces) {
  * ****************************************************************************/
 
 function randomSpace(board) {
-  return nil;
+  return null;
 }
 
 function makeSpace() {
   return {isWall:false, item:null, stamp:null, shop:false}
+}
+
+function outputSpaces(board) {
+  for (var i = 0; i < board.length; i += 1) {
+    var row = board[i];
+    for (var j = 0; j < board.length; j += 1) {
+      $("#game_container").append("<div class='game_space");
+      if (row[j].isWall) {
+        $("#game_container").append(" game_wall");
+      }
+      $("#game_container").append("' id='" + i + "," + j + "'></div>");
+    }
+  }
+  return null;
+}
+
+function generateBlankBoard(x, y, parameters) {
+  board = new Array();
+  for (var i = 0; i < x; i += 1) {
+    var row = new Array();
+    for (var j = 0; j < y; j += 1) {
+      row[j] = makeSpace();
+    }
+    board[i] = row
+  return board;
 }
