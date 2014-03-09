@@ -9,6 +9,8 @@
 /* Creates an X by Y board object according to an array of string PARAMETERS,
  * and returns the resulting board. The parameters that are accepted:
  *    --STAMPS=<N>    -Adds N stamps to the board
+ *    --CUSTOM=<ID>   -Uses a custom map as specified by ID instead of randomly
+ *                     generating a board
  *    --SEED=<V>      -Uses the seed V to generate the board
  *    */
 function generateBoard(x, y, parameters) {
@@ -42,7 +44,7 @@ function generateCustomBoard(x, y, layout) {
       if (layout[i][j] > 0) {
         board[i][j].isWall = false;
         if (layout[i][j] == 2) {
-          board[i][j].stamp = stampCount;
+          board[i][j].stamp = true;
           stampCount += 1;
         } else if (layout[i][j] == 3) {
           board[i][j].shop = true;
@@ -100,7 +102,7 @@ function randomSpace(board) {
 }
 
 function makeSpace() {
-  return {isWall:false, stamp:false}
+  return {isWall:true, stamp:false}
 }
 
 function outputSpaces(board) {
@@ -114,7 +116,7 @@ function outputSpaces(board) {
         classes += " game-wall";
       }
       if (row[j].stamp) {
-        classes += "stamp";
+        classes += " stamp";
       }
       classes += "' id='";
       if (row[j].isWall) {
