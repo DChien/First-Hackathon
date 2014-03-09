@@ -1,5 +1,5 @@
 $(function() {
-  outputBoard(generateBoard());
+  outputBoard(board);
   $('#button-move-menu').click(function() {
     $('#main-menu').fadeOut(function() {
       $('#move-menu').fadeIn();
@@ -34,3 +34,4 @@ $(function() {
   $('#confirm-move').click(chooseMoveButton);
   $('#fund-button').click(fundButton);
 });
+

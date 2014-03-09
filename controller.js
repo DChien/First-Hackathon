@@ -129,7 +129,7 @@ function shopButton() {
 
 
 
-
+var board = generateBoard();
 var step = 0;
 var player0 = new Player("Jeffrey");
 var player1 = new Player("Albert");
