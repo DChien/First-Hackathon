@@ -149,7 +149,6 @@ var baseValue = 7;
 function chooseMoveButton() {
 	chosenMove = $('#move-amount').val();
 	currentPlayer.money += (baseValue - chosenMove);
-	console.log(currentPlayer.money);
 	nextStep(step);
 }
 
@@ -170,7 +169,7 @@ function selectFundersButton() {
 
 */
 function fundButton() {
-	var totalFunds = $('player0fund').val() + $('player1fund').val() + $('player2fund').val(); //+ $('player3fund').val();
+	var totalFunds = parseInt($('#player0fund').val(), 10) + parseInt($('#player1fund').val(), 10) + parseInt($('#player2fund').val(), 10) + parseInt($('#player3fund').val(), 10);
 	if (totalFunds < item.price) {
 		alert("Not enough funds!");
 	} else {
@@ -195,7 +194,7 @@ function boardButton() {
 	if (step == 0) {
 		explains about board square that was clicked;
 	} else if (step == 2 && isLegalMove(currentPlayer, board, clickedSquare.xvalue, clickedsquare.yvalue, allowedMovements)) {
-		board.movePlayer(player, clickedSquare.xvalue, clickedsquare.yvalue);
+		movePlayer(player, clickedSquare.xvalue, clickedsquare.yvalue);
 		nextStep(step);
 }
 
