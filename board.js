@@ -55,25 +55,28 @@ function generateCustomBoard(x, y, layout) {
   return board;
 }
 
+/* Generates an HTML representation of a board. */
 function outputBoard(board) {
   outputSpaces(board);
   return null;
 }
 
-/* Adds a PLAYER to the BOARD. */
+/* Adds a PLAYER to a random spot on the BOARD. */
 function addPlayer(player, board) {
+  var pos = randomSpace(board);
+  player.x = pos[0];
+  player.y = pos[1];
   return null;
 }
 
 /* Moves a PLAYER on a BOARD to the position X, Y, assuming that the move is
  * legal. */
-function movePlayer(player, board, X, Y) {
-  return null;
-}
-
-/* Adds an ITEM to a random space on the BOARD that does not already contain
- * anything. */
-function addItem(item, board) {
+function movePlayer(player, board, x, y) {
+  player.x = pos[0];
+  player.y = pos[1];
+  if (board[x][y].stamp) {
+    removeStamp(board, x, y);
+  }
   return null;
 }
 
@@ -102,27 +105,29 @@ function randomSpace(board) {
 }
 
 function makeSpace() {
-  return {isWall:true, stamp:false}
+  return {isWall:true, stamp:false};
 }
 
 function outputSpaces(board) {
-  var header = "<div class='game-space";
+  var row_header = "<div class='row' id='row";
+  var col_header = "<div class='space";
   var close = "'></div>";
   for (var i = 0; i < board.length; i += 1) {
+    $("#game-container").append(row_header + i + close);
     var row = board[i];
     for (var j = 0; j < board.length; j += 1) {
-      var classes = "";
+      var classes = col_header;
       if (row[j].isWall) {
-        classes += " game-wall";
+        classes += " wall";
       }
       if (row[j].stamp) {
         classes += " stamp";
       }
-      classes += "' id='";
+      classes += "' id='space";
       if (row[j].isWall) {
-        $("#game-container").append(header + classes + i + "," + j + close);
+        $("#row" + i).append(classes + i + "," + j + close);
       } else {
-        $("#game-container").append(header + classes + i + "," + j + close);
+        $("#row" + i).append(classes + i + "," + j + close);
       }
     }
   }
@@ -139,4 +144,8 @@ function generateBlankBoard(x, y) {
     board[i] = row
   }
   return board;
+}
+
+function randomSpace(board) {
+  return [0, 0];
 }
