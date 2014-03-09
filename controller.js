@@ -143,6 +143,7 @@ var currentPlayer = new Player("Derric", 2, 2);
 function chooseMoveButton() {
 	chosenMove = $('#move-amount').val();
 	currentPlayer.money += (baseValue - chosenMove);
+	console.log(currentPlayer.money);
 	nextStep(step);
 }
 
@@ -164,9 +165,9 @@ function selectFundersButton() {
 	}
 }
 
-
+*/
 function fundButton() {
-	var totalFunds = $('player0fund').val() + $('player1fund').val() + $('player2fund').val() + $('player3fund').val();
+	var totalFunds = $('player0fund').val() + $('player1fund').val() + $('player2fund').val(); //+ $('player3fund').val();
 	if (totalFunds < item.price) {
 		alert("Not enough funds!");
 	} else {
@@ -175,7 +176,7 @@ function fundButton() {
 }
 
 
-
+/*
 function nextStep(step) {
 	if (step < 2) {
 		step += 1;
