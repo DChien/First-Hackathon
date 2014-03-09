@@ -31,4 +31,5 @@ $(function() {
       $('#fund-menu').fadeIn();
     });
   });
+  $('#confirm-move').click(chooseMoveButton);
 });

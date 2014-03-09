@@ -153,7 +153,7 @@ function useItemButton() {
 }
 
 function chooseItemButton() {
-	selectedItem = 
+	selectedItem = dfdjfkdf
 	go to fundersSelection menu;
 }
 
