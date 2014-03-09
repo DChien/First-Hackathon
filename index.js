@@ -32,4 +32,5 @@ $(function() {
     });
   });
   $('#confirm-move').click(chooseMoveButton);
+  $('#fund-button').click(fundButton);
 });
