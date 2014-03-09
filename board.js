@@ -16,6 +16,7 @@ function generateBoard(x, y, parameters) {
       row[j] = makeSpace();
     }
     board[i] = row
+  }
   return board;
 }
 
@@ -101,5 +102,6 @@ function generateBlankBoard(x, y, parameters) {
       row[j] = makeSpace();
     }
     board[i] = row
+  }
   return board;
 }
