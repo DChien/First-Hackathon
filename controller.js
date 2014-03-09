@@ -144,8 +144,7 @@ function chooseMoveButton() {
 	chosenMove = $('#move-amount').val();
 	currentPlayer.money += (baseValue - chosenMove);
 	console.log(currentPlayer.money);
-	//nextStep(step);
-	alert("dkjfkldjsf");
+	nextStep(step);
 }
 
 /*
