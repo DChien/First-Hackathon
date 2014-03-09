@@ -164,18 +164,21 @@ function selectFundersButton() {
 	}
 }
 
-
+*/
 function fundButton() {
 	var totalFunds = $('player0fund').val() + $('player1fund').val() + $('player2fund').val() + $('player3fund').val();
-	if (totalFunds < item.price) {
-		alert("Not enough funds!");
-	} else {
-		currentPlayer.itemToUse = item;
+	if (totalFunds == 10) {
+		alert("funds is 10");
 	}
+	//if (totalFunds < item.price) {
+		//alert("Not enough funds!");
+	//} else {
+		//currentPlayer.itemToUse = item;
+	//}
 }
 
 
-
+/*
 function nextStep(step) {
 	if (step < 2) {
 		step += 1;
