@@ -1,0 +1,121 @@
+Take Special action (Choosing either to use item, or look at other parts of the map, or to roll dice)
+
+Take a turn by rolling dice (click the dice button)
+
+Increase money
+
+
+Click the board to decide where to go on the board (board click button)
+
+Special effects that might happen:
+	If land on shop square, need a button to handle the shop (included in the board click button)
+
+	Modify any changes that might happen with the money, stamps, or items
+
+
+---------------------------------------------------------
+
+var step = 1;
+
+function nextStep() {
+	if (step <)
+}
+
+function diceButton() {
+	first figure out which dice to select;
+
+	if (current step is to roll the dice) {
+		rollDice;
+		step += 1;
+	} else {
+		do nothing;
+	}
+}
+
+function boardButton() {
+	first figure out which square was clicked;
+
+	if (current step is to look around the map) {
+		explains about the clicked square;
+	} else if (current step is to move after rolling the dice) {
+		then move player to that location;
+		step += 1;
+	} else if (current step is to select which player to use the item on) {
+		selects the player
+		use the item
+	} else if (current step is to decide what action to take i.e to move, use item, to quit) {
+		selects the action to take;
+	} 
+}
+	
+	function useItemButton() {
+		figure out which item was selected or if selectd option was to go back;
+		if (option was to go back) {
+			go back to the previous menu;
+		} else {
+			go to map to choose which player to use it on;
+			}
+	}
+
+
+
+
+	function shopButton() {
+		figure out which option is selected i.e. to shop or to leave;
+		if (option selected was to leave) {
+			go back to game board;
+		} else if (option selected was to shop) {
+			open up the available items menu;
+		}
+	}
+
+	function shopItemsButton() {
+		figure out which option is selected i.e. to purchase a particular item or to go back;
+		if (option selected was to go back) {
+			go back to the shop menu;
+		} else if (option selected was a particular item) {
+			if (player.money >= item.price) {
+				let player buy the item;
+			} else {
+				Display "not enough money" message
+			}
+		}
+	}
+
+
+
+
+
+
+	function characterButton() {
+		first figure out which character to select;
+
+		if (current step is to look around the map) {
+			give information on the character selected;
+		} else if (current step is to select which character to use an item on) {
+			item effect happens;
+		} 
+	}
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
