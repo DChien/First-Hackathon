@@ -143,7 +143,7 @@ var currentPlayer = new Player("Derric", 2, 2);
 function chooseMoveButton() {
 	chosenMove = $('#move-amount').val();
 	currentPlayer.money += (baseValue - chosenMove);
-	console.log("Hello World");
+	console.log(currentPlayer.money);
 	nextStep(step);
 }
 
