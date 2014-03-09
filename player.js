@@ -14,37 +14,20 @@ function randrange(end) {
  */
 
 
-function Player(name, width, height) {
+function Player(name) {
   this.name = name;
-  this.x = randrange(width);
-  this.y = randrange(height);
+  this.x = 0;
+  this.y = 0;
   this.money = 0;
   this.stamps = 0;
-  this.powerups = {};
+  this.itemToUse = null;
+  this.paralyzeCounter = 0;
 }
 
 Player.population = 0
-Player.prototype.updateState = function(newX, newY, moneyAmount, stampsAmount) {
-  this.animateMovement(this.x, this.y, newX, newY);
-  this.x = newX;
-  this.y = newY;
-  this.money += moneyAmount;
-  this.stamps += stampsAmount;
-  this.id = Player.population++;
-  this.usingItem = false;
-  this.itemToUse = null;
-}
 
 Player.prototype.animateMovement = function(currX, currY, newX, newY) {
   // TODO
-}
-
-Player.prototype.buyPowerup = function(powerup, amount, cost) {
-  this.money -= cost;
-  if (!this.powerups.hasOwnProperty(powerup)) {
-    this.powerups.powerup = 0;
-  }
-  this.powerups.powerup += amount;
 }
 
 
@@ -52,12 +35,20 @@ Player.prototype.usePowerup = function(powerup) {
   if (!allPowerups.hasOwnProperty(powerup)) {
     // TODO
     console.log('no such powerup ' + powerup);
-  } else if (!this.powerups.hasOwnProperty(powerup)) {
-    // TODO
-    console.log('player has no powerups ' + powerup);
-  }
-  this.powerups.powerup--;
   this.itemToUse = allPowerups.powerup;
+}
+
+Player.prototype.setPosition = function(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+Player.prototype.move = function(x, y, tickets) {
+  this.x = x;
+  this.y = y;
+  if (tickets) {
+    this.stamps++;
+  }
 }
 
 
