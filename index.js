@@ -1,5 +1,5 @@
 $(function() {
-  outputBoard(generateTestBoard());
+  outputBoard(generateBoard());
   $('#button-move-menu').click(function() {
     $('#main-menu').fadeOut(function() {
       $('#move-menu').fadeIn();

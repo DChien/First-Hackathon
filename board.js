@@ -35,7 +35,6 @@ function generateTestBoard() {
  * */
 function generateCustomBoard(x, y, layout) {
   board = [];
-  var stampCount = 0;
   for (var i = 0; i < layout.length; i += 1) {
     var row = layout[i];
     board[i] = [];
@@ -45,7 +44,6 @@ function generateCustomBoard(x, y, layout) {
         board[i][j].isWall = false;
         if (layout[i][j] == 2) {
           board[i][j].stamp = true;
-          stampCount += 1;
         }
       }
     }
@@ -131,12 +129,18 @@ function outputSpaces(board) {
       }
       classes += "' id='space";
       if (row[j].isWall) {
-        $("#row" + i).append(classes + i + "," + j + close);
+        $("#row" + i).append(classes + i + "-" + j + close);
       } else {
-        $("#row" + i).append(classes + i + "," + j + close);
+        $("#row" + i).append(classes + i + "-" + j + close);
       }
     }
   }
+  return null;
+}
+
+function removeStamp(board, x, y) {
+  board[x][y].stamp = false;
+  $("#space" + x + "-" + y).removeClass("stamp");
   return null;
 }
 
@@ -208,8 +212,13 @@ function generatePrebuiltBoard(id) {
       [1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 1],
       [1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
       [2, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2],
       [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];        
+  } else if (id == 9999) {
+    var x = 2;
+    var y = 2;
+    var layout = [[1, 0], [0, 1]];
   }
   return generateCustomBoard(x, y, layout);
 }
