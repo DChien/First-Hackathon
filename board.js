@@ -6,8 +6,11 @@
  * Methods below can be called outside of the file.
  * ****************************************************************************/
 
-/* Creates a board object according to an array of string PARAMETERS, and
- * returns the resulting board. */
+/* Creates an X by Y board object according to an array of string PARAMETERS,
+ * and returns the resulting board. The parameters that are accepted:
+ *    --STAMPS=<N>    -Adds N stamps to the board
+ *    --SEED=<V>      -Uses the seed V to generate the board
+ *    */
 function generateBoard(x, y, parameters) {
   board = generateBlankBoard(x, y);
   return board;
@@ -60,8 +63,9 @@ function addPlayer(player, board) {
   return null;
 }
 
-/* Moves a PLAYER on a BOARD to a POSITION, assuming that the move is legal. */
-function movePlayer(player, board, position) {
+/* Moves a PLAYER on a BOARD to the position X, Y, assuming that the move is
+ * legal. */
+function movePlayer(player, board, X, Y) {
   return null;
 }
 
@@ -71,10 +75,10 @@ function addItem(item, board) {
   return null;
 }
 
-/* Given a PLAYER on a BOARD, and a POSITION, and the number of SPACES that the
- * player can travel, returns TRUE iff the player can legally move to that
+/* Given a PLAYER on a BOARD, and a X, Y position, and the number of SPACES that
+ * the player can travel, returns TRUE iff the player can legally move to that
  * position. */
-function isLegalMove(player, board, position, spaces) {
+function isLegalMove(player, board, x, y, spaces) {
   return false;
 }
 
@@ -96,20 +100,27 @@ function randomSpace(board) {
 }
 
 function makeSpace() {
-  return {isWall:false, item:null, stamp:null, shop:false}
+  return {isWall:false, stamp:false}
 }
 
 function outputSpaces(board) {
-  var space_header = "<div class='game_space' id='";
-  var wall_header = "<div class='game_space game_wall' id='";
+  var header = "<div class='game-space";
   var close = "'></div>";
   for (var i = 0; i < board.length; i += 1) {
     var row = board[i];
     for (var j = 0; j < board.length; j += 1) {
+      var classes = "";
       if (row[j].isWall) {
-        $("#game-container").append(wall_header + i + "," + j + close);
+        classes += " game-wall";
+      }
+      if (row[j].stamp) {
+        classes += "stamp";
+      }
+      classes += "' id='";
+      if (row[j].isWall) {
+        $("#game-container").append(header + classes + i + "," + j + close);
       } else {
-        $("#game-container").append(space_header + i + "," + j + close);
+        $("#game-container").append(header + classes + i + "," + j + close);
       }
     }
   }
