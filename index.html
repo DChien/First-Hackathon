@@ -19,9 +19,11 @@
       max: 6,
       step: 1,
       slide: function( event, ui ) {
+        $( "#move-amount").val(ui.value);   ///ask albert why this should be removed
         $( "#move-amount" ).text(ui.value);
       }
     });
+    $( "#move-amount").val(1);    // ask albert hwy this should be removed
     $( "#move-amount" ).text(1);
   });
   </script>
