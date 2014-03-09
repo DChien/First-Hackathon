@@ -168,7 +168,7 @@ function selectFundersButton() {
 function fundButton() {
 	var totalFunds = $('player0fund').val() + $('player1fund').val() + $('player2fund').val() + $('player3fund').val();
 	if (totalFunds == 10) {
-		alert("funds is 10");
+		console.log("funds is 10");
 	}
 	//if (totalFunds < item.price) {
 		//alert("Not enough funds!");
