@@ -22,12 +22,22 @@ function Player(name) {
   this.stamps = 0;
   this.itemToUse = null;
   this.paralyzeCounter = 0;
+  this.ID = Player.population++;
 }
 
 Player.population = 0
 
 Player.prototype.animateMovement = function(currX, currY, newX, newY) {
   // TODO
+  this.updatePosition(newX, newY);
+}
+
+Player.prototype.updatePosition = function(newX, newY) {
+  $("#player" + this.ID).remove();
+  var div = "<div class='player' id='player" + this.ID + "'>" + this.ID + "</div>";
+  var target = "#space" + newX + "-" + newY;
+  $(target).append(div);
+  return null;
 }
 
 
@@ -44,12 +54,13 @@ Player.prototype.setPosition = function(x, y) {
   this.y = y;
 }
 
-Player.prototype.move = function(x, y, tickets) {
+Player.prototype.move = function(x, y, stamps) {
   this.x = x;
   this.y = y;
-  if (tickets) {
+  if (stamps) {
     this.stamps++;
   }
+  this.animateMovement(this.x, this.y, x, y);
 }
 
 

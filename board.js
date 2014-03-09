@@ -54,6 +54,7 @@ function generateCustomBoard(x, y, layout) {
 /* Generates an HTML representation of a board. */
 function outputBoard(board) {
   outputSpaces(board);
+  addPlayers();
   return null;
 }
 
@@ -68,10 +69,10 @@ function addPlayer(player, board) {
  * legal. */
 function movePlayer(player, board, x, y) {
   stamp = board[x][y].stamp;
+  player.move(x, y, board[x][y].stamp);
   if (stamp) {
     removeStamp(board, x, y);
   }
-  player.move(x, y, board);
   return null;
 }
 
@@ -101,11 +102,16 @@ function randomSpace(board) {
   while (true) {
     var x = Math.floor(Math.random() * xMax);
     var y = Math.floor(Math.random() * yMax);
-    if (!board[x][y].stamp && !board[x][y].wall) {
+    if (!board[x][y].stamp && !board[x][y].isWall) {
       return [x, y];
     }
   }
   return null;
+}
+
+function checkRandomSpace(board) {
+  var pos = randomSpace(board);
+  return (board[pos[0]][pos[1]]).isWall;
 }
 
 function makeSpace() {
@@ -134,6 +140,13 @@ function outputSpaces(board) {
         $("#row" + i).append(classes + i + "-" + j + close);
       }
     }
+  }
+  return null;
+}
+
+function addPlayers() {
+  for (var i = 0; i < players.length; i += 1) {
+    players[i].updatePosition(players[i].x, players[i].y);
   }
   return null;
 }
