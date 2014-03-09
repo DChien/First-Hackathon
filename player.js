@@ -1,5 +1,5 @@
 
-powerups = {
+allPowerups = {
   'example': {
     'cost': 4,
   },
@@ -31,6 +31,8 @@ Player.prototype.updateState = function(newX, newY, moneyAmount, stampsAmount) {
   this.money += moneyAmount;
   this.stamps += stampsAmount;
   this.id = Player.population++;
+  this.usingItem = false;
+  this.itemToUse = null;
 }
 
 Player.prototype.animateMovement = function(currX, currY, newX, newY) {
@@ -45,12 +47,17 @@ Player.prototype.buyPowerup = function(powerup, amount, cost) {
   this.powerups.powerup += amount;
 }
 
+
 Player.prototype.usePowerup = function(powerup) {
-  if (!this.powerups.hasOwnProperty(powerup)) {
+  if (!allPowerups.hasOwnProperty(powerup)) {
     // TODO
     console.log('no such powerup ' + powerup);
+  } else if (!this.powerups.hasOwnProperty(powerup)) {
+    // TODO
+    console.log('player has no powerups ' + powerup);
   }
   this.powerups.powerup--;
+  this.itemToUse = allPowerups.powerup;
 }
 
 
