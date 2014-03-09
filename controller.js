@@ -133,34 +133,31 @@ function shopButton() {
 
 
 
------------------------------------
+var players;
 var baseValue = 7;
-
-function moveButton() {
-	goes to choosing move menu;
-}
+var currentPlayer = new Player("Derric", 2, 2);
+//function moveButton() {
+	//goes to choosing move menu;
+//}
 
 function chooseMoveButton() {
-	chosenMove = number of steps that was chosen;
-	currentPlayer.money += (baseValue - chosenMove)
+	chosenMove = $('#move-amount').val();
+	currentPlayer.money += (baseValue - chosenMove);
 	nextStep(step);
 }
 
-function goBackButton(currentMenu) {
-	go back to previous menu;
-}
+/*
 
 function useItemButton() {
 	go to select item menu;
 }
 
 function chooseItemButton() {
-	clickedOption = selected item
+	selectedItem = 
 	go to fundersSelection menu;
-	//currentPlayer.usePowerup(clickedOption);
 }
 
-function selectFunders() {
+function selectFundersButton() {
 	create list of funders that are clicked
 	if (all the funding is enough) {
 		currentPlayer.usePowerup(selectedPowerup)
@@ -168,6 +165,25 @@ function selectFunders() {
 }
 
 
+function fundButton() {
+	var totalFunds = $('player0fund').val() + $('player1fund').val() + $('player2fund').val() + $('player3fund').val();
+	if (totalFunds < item.price) {
+		alert("Not enough funds!");
+	} else {
+		currentPlayer.itemToUse = item;
+	}
+}
+
+
+
+function nextStep(step) {
+	if (step < 2) {
+		step += 1;
+	} else {
+		step = 0;
+		c
+	}
+}
 
 
 function boardButton() {
@@ -186,7 +202,7 @@ function characterButton() {
 		currentPlayer.itemToUse();
 		return to ChooseAction menu
 	}
-}
+}*/
 
 
 
