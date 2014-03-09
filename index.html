@@ -18,10 +18,10 @@
       max: 6,
       step: 1,
       slide: function( event, ui ) {
-        $( "#move-amount" ).val(ui.value);
+        $( "#move-amount" ).text(ui.value);
       }
     });
-    $( "#move-amount" ).val(1);
+    $( "#move-amount" ).text(1);
   });
   </script>
     <script src='index.js'></script>
@@ -30,16 +30,32 @@
   <body>
     <h1>Hello world!</h1>
     <div id='game-menu'>
-      <div id='game-menu-moves'>
+      <div id='main-menu'>
+        <button id='button-item-menu'>Use Item</button>
+        <button id='button-move-menu'>Move</button>
+      </div>
+
+      <div id='move-menu' class='hidden'>
         Choose Moves:
-        <input type='text' id='move-amount' readonly>
+        <span id='move-amount'></span>
         <div id='move-slider'></div>
         <button id='confirm-move'>Move</button>
+        <button id='move-menu-back-button'>Go back</button>
       </div>
-      <div id='game-menu-items'>
-        <div>item1</div>
-        <div>item2</div>
-        <div>item3</div>
+
+      <div id='item-menu' class='hidden'>
+        <button class='item-button' id='item1'>Item1</button>
+        <button class='item-button' id='item2'>Item2</button>
+        <button class='item-button' id='item3'>Item3</button>
+        <button id='item-menu-back-button'>Go back</button>
+      </div>
+
+      <div id='fund-menu' class='hidden'>
+        <p id='fund-menu-item'></p>
+        <input type='text' id='player0fund'>
+        <input type='text' id='player1fund'>
+        <input type='text' id='player2fund'>
+        <button id='fund-menu-back-button'>Go back</button>
       </div>
     </div>
     <div id='game-container'>
