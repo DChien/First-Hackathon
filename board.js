@@ -6,16 +6,17 @@
  * Methods below can be called outside of the file.
  * ****************************************************************************/
 
-/* Creates an X by Y board object according to an array of string PARAMETERS,
- * and returns the resulting board. The parameters that are accepted:
- *    --STAMPS=<N>    -Adds N stamps to the board
- *    --CUSTOM=<ID>   -Uses a custom map as specified by ID instead of randomly
- *                     generating a board
- *    --SEED=<V>      -Uses the seed V to generate the board
- *    */
-function generateBoard(x, y, parameters) {
-  board = generateBlankBoard(x, y);
-  return board;
+/* Creates board object and returns the resulting board. */
+function generateBoard() {
+  options = queryBoardCustomization();
+  if (options[0] != -1) {
+    return generatePrebuiltBoard(options[0]);
+  }
+  return generateRandomBoard(options[1], options[2]);
+}
+
+function queryBoardCustomization() {
+  return [0, 0, 0];
 }
 
 /* Generates a small test 2x2 board */
@@ -31,7 +32,6 @@ function generateTestBoard() {
  *     0 - A wall
  *     1 - An empty space
  *     2 - A stamp
- *     3 - A shop
  * */
 function generateCustomBoard(x, y, layout) {
   board = [];
@@ -46,8 +46,6 @@ function generateCustomBoard(x, y, layout) {
         if (layout[i][j] == 2) {
           board[i][j].stamp = true;
           stampCount += 1;
-        } else if (layout[i][j] == 3) {
-          board[i][j].shop = true;
         }
       }
     }
@@ -64,19 +62,18 @@ function outputBoard(board) {
 /* Adds a PLAYER to a random spot on the BOARD. */
 function addPlayer(player, board) {
   var pos = randomSpace(board);
-  player.x = pos[0];
-  player.y = pos[1];
+  player.setPosition(pos[0], pos[1]);
   return null;
 }
 
 /* Moves a PLAYER on a BOARD to the position X, Y, assuming that the move is
  * legal. */
 function movePlayer(player, board, x, y) {
-  player.x = pos[0];
-  player.y = pos[1];
-  if (board[x][y].stamp) {
+  stamp = board[x][y].stamp;
+  if (stamp) {
     removeStamp(board, x, y);
   }
+  player.move(x, y, board);
   return null;
 }
 
@@ -84,13 +81,13 @@ function movePlayer(player, board, x, y) {
  * the player can travel, returns TRUE iff the player can legally move to that
  * position. */
 function isLegalMove(player, board, x, y, spaces) {
-  return false;
+  return [x, y] in allLegalMoves(player, board, spaces);
 }
 
 /* Given a PLAYER on a BOARD and the number of SPACES that the player can
  * travel, returns an array of all legal positions that a player can move to. */
 function allLegalMoves(player, board, spaces) {
-  return new Array();
+  return bfs(board, player.x, player.y, spaces);
 }
 
 /* ****************************************************************************
@@ -101,6 +98,15 @@ function allLegalMoves(player, board, spaces) {
  * ****************************************************************************/
 
 function randomSpace(board) {
+  var xMax = board.length;
+  var yMax = board[0].length;
+  while (true) {
+    var x = Math.floor(Math.random() * xMax);
+    var y = Math.floor(Math.random() * yMax);
+    if (!board[x][y].stamp && !board[x][y].wall) {
+      return [x, y];
+    }
+  }
   return null;
 }
 
@@ -146,6 +152,64 @@ function generateBlankBoard(x, y) {
   return board;
 }
 
-function randomSpace(board) {
-  return [0, 0];
+function validSpace(board, x, y) {
+  if (x >= 0 && y >= 0 && x < board.length && y < board[0].length) {
+    return !(board[x][y].isWall);
+  }
+  return false;
+}
+
+function adjacent(board, x, y) {
+  legal = [];
+  if (validSpace(board, x + 1, y + 1)) {
+    legal.push([x + 1, y + 1]);
+  }
+  if (validSpace(board, x + 1, y - 1)) {
+    legal.push([x + 1, y - 1]);
+  }
+  if (validSpace(board, x - 1, y + 1)) {
+    legal.push([x - 1, y + 1]);
+  } 
+  if (validSpace(board, x - 1, y - 1)) {
+    legal.push([x - 1, y - 1]);
+  }
+  return legal;
+}
+
+function bfs(board, x, y, moves) {
+  var valid = [];
+  var visited = [[x, y]];
+  var queue = [[[x, y], 0]];
+  while (queue.length > 0) {
+    var p = queue.shift();
+    for (var adj in adjacent(board, p[0][0], p[0][1])) {
+      if (p[1] == moves) {
+        valid.push(p[0]);
+      } else if (!(adj in visited)) {
+        visited.push(adj);
+        queue.push([adj, p[1] + 1]);
+      }
+    }
+  }
+  return valid;
+}
+
+function generatePrebuiltBoard(id) {
+  if (id == 0) {
+    var x = 12;
+    var y = 12;
+    var layout = [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+      [1, 0, 2, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+      [1, 0, 1, 0, 2, 0, 2, 0, 1, 1, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
+      [2, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];        
+  }
+  return generateCustomBoard(x, y, layout);
 }

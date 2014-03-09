@@ -35,6 +35,7 @@ Player.prototype.usePowerup = function(powerup) {
   if (!allPowerups.hasOwnProperty(powerup)) {
     // TODO
     console.log('no such powerup ' + powerup);
+  }
   this.itemToUse = allPowerups.powerup;
 }
 
