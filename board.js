@@ -9,14 +9,7 @@
 /* Creates a board object according to an array of string PARAMETERS, and
  * returns the resulting board. */
 function generateBoard(x, y, parameters) {
-  board = new Array();
-  for (var i = 0; i < x; i += 1) {
-    var row = new Array();
-    for (var j = 0; j < y; j += 1) {
-      row[j] = makeSpace();
-    }
-    board[i] = row
-  }
+  board = generateBlankBoard(x, y);
   return board;
 }
 
@@ -81,23 +74,26 @@ function makeSpace() {
 }
 
 function outputSpaces(board) {
+  var space_header = "<div class='game_space' id='";
+  var wall_header = "<div class='game_space game_wall' id='";
+  var close = "'></div>";
   for (var i = 0; i < board.length; i += 1) {
     var row = board[i];
     for (var j = 0; j < board.length; j += 1) {
-      $("#game_container").append("<div class='game_space");
       if (row[j].isWall) {
-        $("#game_container").append(" game_wall");
+        $("#game-container").append(wall_header + i + "," + j + close);
+      } else {
+        $("#game-container").append(space_header + i + "," + j + close);
       }
-      $("#game_container").append("' id='" + i + "," + j + "'></div>");
     }
   }
   return null;
 }
 
-function generateBlankBoard(x, y, parameters) {
-  board = new Array();
+function generateBlankBoard(x, y) {
+  board = [];
   for (var i = 0; i < x; i += 1) {
-    var row = new Array();
+    var row = [];
     for (var j = 0; j < y; j += 1) {
       row[j] = makeSpace();
     }
