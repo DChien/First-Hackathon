@@ -1,4 +1,4 @@
-Take Special action (Choosing either to use item, or look at other parts of the map, or to roll dice)
+/*Take Special action (Choosing either to use item, or look at other parts of the map, or to roll dice)
 
 Take a turn by rolling dice (click the dice button)
 
@@ -74,7 +74,7 @@ function useItemButton() {
 
 
 
-	/* Button for when starting to shop */
+	 Button for when starting to shop 
 function shopButton() {
 	clickedOption = option that was clicked;        ///////figure out which option is selected i.e. to shop or to leave;
 	if (clickedOption == go back) {
@@ -93,7 +93,7 @@ function shopButton() {
 
 
 
-	/* Button for when actually starting to shop for items */
+	Button for when actually starting to shop for items 
 	function makeShopItemsButton(item) {
 		return function shopItemsButton() {
 			clickedOption = option or item that is selected          /////////figure out which option is selected i.e. to purchase a particular item or to go back;
@@ -113,7 +113,7 @@ function shopButton() {
 
 
 
-	/* Button for when clicking on other characters */
+	 Button for when clicking on other characters 
 	function characterButton() {
 		first figure out which character to select;
 
@@ -122,7 +122,7 @@ function shopButton() {
 		} else if (step == 1 && currentPlayer.itemToUse != null) ///////current step is to select which character to use an item on) {
 			currentPlayer.itemToUse();
 		} 
-	}
+	}*/
 
 
 	
@@ -134,15 +134,15 @@ function shopButton() {
 
 
 -----------------------------------
+var baseValue = 7;
 
-
-function rollDiceButton() {
-	goes to choosing Dice menu;
+function moveButton() {
+	goes to choosing move menu;
 }
 
-function chooseDiceButton() {
-	chosenDice = dice that was chosen;
-	Roll dice with chosenDice;
+function chooseMoveButton() {
+	chosenMove = number of steps that was chosen;
+	currentPlayer.money += (baseValue - chosenMove)
 	nextStep(step);
 }
 
@@ -156,29 +156,25 @@ function useItemButton() {
 
 function chooseItemButton() {
 	clickedOption = selected item
-	currentPlayer.usePowerup(clickedOption);
+	go to fundersSelection menu;
+	//currentPlayer.usePowerup(clickedOption);
 }
 
-function shopButton() {
-	go to Shop menu;
-}
-
-
-/* The following function is returned by makeShopItemsButton
-function shopItemsButton() {         
-	if (currentPlayer.money >= item.price) {
-		currentPlayer.buyPowerup(item, currentPlayer.money, item.price);
-	} else {
-		Display "not enough money" message
+function selectFunders() {
+	create list of funders that are clicked
+	if (all the funding is enough) {
+		currentPlayer.usePowerup(selectedPowerup)
 	}
 }
+
+
 
 
 function boardButton() {
 	if (step == 0) {
 		explains about board square that was clicked;
-	} else if (step == 2 && isLegalMove(currentPlayer, board, clickedSquare, allowedMovements)) {
-		board.movePlayer(player, clickedSquare);
+	} else if (step == 2 && isLegalMove(currentPlayer, board, clickedSquare.xvalue, clickedsquare.yvalue, allowedMovements)) {
+		board.movePlayer(player, clickedSquare.xvalue, clickedsquare.yvalue);
 		nextStep(step);
 }
 
