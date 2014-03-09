@@ -13,6 +13,7 @@ function generateBoard(x, y, parameters) {
   return board;
 }
 
+/* Generates a small test 2x2 board */
 function generateTestBoard() {
   board = generateBlankBoard(2, 2);
   board[0][0].isWall = false;
@@ -20,8 +21,33 @@ function generateTestBoard() {
   return board;
 }
 
-function generateCustomBoard() {
-  return null;
+/* Generates a custom X by Y board, whose LAYOUT is specified as an array of an
+ * array of numbers. The numbers are represent the following spaces:
+ *     0 - A wall
+ *     1 - An empty space
+ *     2 - A stamp
+ *     3 - A shop
+ * */
+function generateCustomBoard(x, y, layout) {
+  board = [];
+  var stampCount = 0;
+  for (var i = 0; i < layout.length; i += 1) {
+    var row = layout[i];
+    board[i] = [];
+    for (var j = 0; j < row.length; j += 1) {
+      board[i][j] = makeSpace();
+      if (layout[i][j] > 0) {
+        board[i][j].isWall = false;
+        if (layout[i][j] == 2) {
+          board[i][j].stamp = stampCount;
+          stampCount += 1;
+        } else if (layout[i][j] == 3) {
+          board[i][j].shop = true;
+        }
+      }
+    }
+  }
+  return board;
 }
 
 function outputBoard(board) {
