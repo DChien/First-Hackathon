@@ -130,15 +130,21 @@ function shopButton() {
 
 
 
-
-
-
-var players;
+var step = 0;
+var player0 = new Player("Jeffrey");
+var player1 = new Player("Albert");
+var player2 = new Player("Derric");
+var player3 = new Player("Person");
+currentPlayer = player0;
+addPlayer(player0, board);
+addPlayer(player1, board);
+addPlayer(player2, board);
+addPlayer(player3, board);
+var players = [player0, player1, player2, player3];
+var playerTracker = 0;
 var baseValue = 7;
-var currentPlayer = new Player("Derric", 2, 2);
-//function moveButton() {
-	//goes to choosing move menu;
-//}
+//var currentPlayer = new Player("Derric", 2, 2);
+
 
 function chooseMoveButton() {
 	chosenMove = $('#move-amount').val();
@@ -149,13 +155,10 @@ function chooseMoveButton() {
 
 /*
 
-function useItemButton() {
-	go to select item menu;
-}
+
 
 function chooseItemButton() {
 	selectedItem = dfdjfkdf
-	go to fundersSelection menu;
 }
 
 function selectFundersButton() {
@@ -171,22 +174,23 @@ function fundButton() {
 	if (totalFunds < item.price) {
 		alert("Not enough funds!");
 	} else {
-		currentPlayer.itemToUse = item;
+		currentPlayer.usePowerup(selectedItem);
 	}
 }
 
 
-/*
+
 function nextStep(step) {
 	if (step < 2) {
 		step += 1;
 	} else {
 		step = 0;
-		c
+		playerTracker += 1;
+		currentPlayer = players[playerTracker % 4];
 	}
 }
 
-
+/*
 function boardButton() {
 	if (step == 0) {
 		explains about board square that was clicked;
@@ -205,7 +209,13 @@ function characterButton() {
 	}
 }*/
 
+//function moveButton() {
+	//goes to choosing move menu;
+//}
 
 
+//function useItemButton() {
+	//go to select item menu;
+//}
 
 
